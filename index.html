@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
   <meta name="description" content="HTML Script Birthday Gift">
   <meta property="og:title" content="Special Gift For You ✨">
-  <meta property="og:description" content="Hey Anu..., it's your birthday today 🫂">
+  <meta property="og:description" content="Hey Mun..., it's your birthday today 🫂">
   <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhMDugl2siKVTnQUhkzqZXmNhnUl_IXm-tsnodgHf4C3dPn6v4gz06nVm1ASqpRXO65Dg3PkYB9bKsThBPUxygLD9Euem9SSTr0LRIGK9x5uaLvK4WIPn6VlSx0qSrPGhTknGVHeVMpioiBcXiqrk-dF3d4SYS8QIkWkDlMgRrdF4vw_iw-EOgTYcwo6xhs/s300/1000314955.jpg">
   <meta property="og:image:alt" content="hbd">
   <meta property="og:type" content="website">
@@ -26,7 +26,7 @@
   <audio src="./assets/angelbabydj.mp3" id="linkmp3" class="hidden" loop></audio>
   <div class="overlay">
     <div class="cover">
-      <p style="font-size:17px; font-weight:700; margin:0">Hi Birthday Girl <b>Anu...</b>👋 <br/> There is a gift for you by Kumar Ritu Raj 🥳 </p>
+      <p style="font-size:17px; font-weight:700; margin:0">Hi Birthday Girl <b>Mun...</b>👋 <br/> Something for you by Ritu 🥳 </p>
       <div id="loveIn" class="initial">
         <svg class="line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <g transform="translate(2.000000, 2.000000)">
@@ -75,10 +75,10 @@
         st5.src,
       ];
       const texts = [
-        "<b style='font-size:20px'>Hey👋, Anu...! 😆</b><br><br><span class='altText'>It’s your birthday today 🫣 <br /> 20-05-2025💗</span><br><br><b><i>Happy Birthday!</i> 🥳</b>",
+        "<b style='font-size:20px'>Hey👋, Muno...! 😆</b><br><br><span class='altText'>It’s your birthday today 🫣 <br /> 26-05-2025💗</span><br><br><b><i>Happy Birthday!</i> 🥳</b>",
         "Would you like a gift? 😆",
         "<span id='textStuck'><b style='font-size:20px'>Alright! 😆</b><br><br><span class='altText' style='line-height:1.5em'>On the count of <b style='color:yellow;'> 4 </b>, I will give you a<br> gift! 🥳 are you Excited 🤩</span></span><br><br><span id='teksTime'><b style='font-size:20px'>⏳ <span id='timerLeft'>1</span></b></span>",
-        "<b style='font-size:20px'>Happy Birthday Anu Priya🫣</b><br><br><span class='altText' style='line-height:1.5em'>🤗🤗Wish You Many-Many Happy Returns of the Day 🤗🤗</span>",
+        "<b style='font-size:20px'>Happy Birthday Mun🫣</b><br><br><span class='altText' style='line-height:1.5em'>🤗🤗Wish You Many-Many Happy Returns of the Day 🤗🤗</span>",
         "<span style='font-size:17px;font-weight:400'>Have A Great Life 🤩</span>",
       ];
 
@@ -236,8 +236,8 @@
         }, duration * 1000);
       }
       // Example: createFallingBalloon(1.2) for normal, createFallingBalloon(0.5) for faster
-      setInterval(() => createFallingBalloon(1.2), 1200); // Normal speed
-      setInterval(() => createFallingBalloon(0.5), 3000); // Some faster balloons
+      setInterval(() => createFallingBalloon(1.2), 1200);
+      setInterval(() => createFallingBalloon(0.5), 3000);
       // --- End Falling Balloon Effect ---
 
       // --- Falling Present Effect (JS) ---
@@ -267,40 +267,9 @@
           present.remove();
         }, duration * 1000);
       }
-      setInterval(() => createFallingPresent(1.5), 1800); // Normal speed
-      setInterval(() => createFallingPresent(0.7), 4000); // Some faster presents
-      // --- End Falling Present Effect ---
+      setInterval(() => createFallingPresent(1.5), 1800);
+      setInterval(() => createFallingPresent(0.7), 4000); 
 
-      // --- Falling Candle Effect (JS) ---
-      function createFallingCandle(speed = 2.2) {
-        const candle = document.createElement('div');
-        candle.className = 'falling-candle';
-        const size = Math.random() * 8 + 18; // 18px to 26px
-        candle.style.width = size + 'px';
-        candle.style.height = (size * 2) + 'px';
-        candle.style.left = Math.random() * 98 + 'vw';
-        candle.style.opacity = (Math.random() * 0.5 + 0.7).toFixed(2);
-        // Random color for candle body
-        const colors = ['#fff', '#ffe066', '#ffb347', '#f67280', '#6c5ce7'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        candle.innerHTML = `<svg viewBox='0 0 16 32'><rect x='5' y='8' width='6' height='18' rx='2' fill='${color}'/><ellipse cx='8' cy='8' rx='3' ry='4' fill='#fff8dc'/><polygon points='8,0 10,8 6,8' fill='#ffd700'/></svg>`;
-        document.body.appendChild(candle);
-        const duration = (Math.random() * 1.5 + speed + 1.5); // 3.2s to 5.2s
-        candle.animate([
-          { transform: `translateY(0px)` },
-          { transform: `translateY(${window.innerHeight + 40}px)` }
-        ], {
-          duration: duration * 1000,
-          easing: 'linear',
-          fill: 'forwards'
-        });
-        setTimeout(() => {
-          candle.remove();
-        }, duration * 1000);
-      }
-      setInterval(() => createFallingCandle(2.2), 2500); // Normal speed
-      setInterval(() => createFallingCandle(1.0), 6000); // Some faster candles
-      // --- End Falling Candle Effect ---
 
       // --- Falling Party Hat Effect (JS) ---
       function createFallingPartyHat(speed = 1.0) {
@@ -329,8 +298,8 @@
           hat.remove();
         }, duration * 1000);
       }
-      setInterval(() => createFallingPartyHat(1.0), 2000); // Normal speed
-      setInterval(() => createFallingPartyHat(0.5), 5000); // Some faster hats
+      setInterval(() => createFallingPartyHat(1.0), 2000);
+      setInterval(() => createFallingPartyHat(0.5), 5000);
       // --- End Falling Party Hat Effect ---
 
       // --- Falling Heart Effect (JS) ---
@@ -357,8 +326,8 @@
           heart.remove();
         }, duration * 1000);
       }
-      setInterval(() => createFallingHeart(1.7), 1700); // Normal speed
-      setInterval(() => createFallingHeart(0.7), 4000); // Some faster hearts
+      setInterval(() => createFallingHeart(1.7), 1700); 
+      setInterval(() => createFallingHeart(0.7), 4000); 
       // --- End Falling Heart Effect ---
 
       // --- Falling Smiley Face Effect (JS) ---
@@ -385,40 +354,11 @@
           smiley.remove();
         }, duration * 1000);
       }
-      setInterval(() => createFallingSmiley(2.0), 2200); // Normal speed
-      setInterval(() => createFallingSmiley(0.8), 5000); // Some faster smileys
+      setInterval(() => createFallingSmiley(2.0), 2200); 
+      setInterval(() => createFallingSmiley(0.8), 5000);
       // --- End Falling Smiley Face Effect ---
 
-      // --- Falling Cupcake Effect (JS) ---
-      function createFallingCupcake(speed = 2.5) {
-        const cupcake = document.createElement('div');
-        cupcake.className = 'falling-cupcake';
-        const size = Math.random() * 14 + 22; // 22px to 36px
-        cupcake.style.width = size + 'px';
-        cupcake.style.height = size + 'px';
-        cupcake.style.left = Math.random() * 98 + 'vw';
-        cupcake.style.opacity = (Math.random() * 0.5 + 0.7).toFixed(2);
-        // Random color for cupcake top
-        const colors = ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        cupcake.innerHTML = `<svg viewBox='0 0 32 32'><ellipse cx='16' cy='16' rx='14' ry='8' fill='${color}'/><rect x='6' y='16' width='20' height='10' rx='4' fill='#fff'/><rect x='10' y='22' width='12' height='6' rx='2' fill='#ffb347'/></svg>`;
-        document.body.appendChild(cupcake);
-        const duration = (Math.random() * 1.5 + speed + 1.5); // 3.5s to 5.5s
-        cupcake.animate([
-          { transform: `translateY(0px)` },
-          { transform: `translateY(${window.innerHeight + 40}px)` }
-        ], {
-          duration: duration * 1000,
-          easing: 'linear',
-          fill: 'forwards'
-        });
-        setTimeout(() => {
-          cupcake.remove();
-        }, duration * 1000);
-      }
-      setInterval(() => createFallingCupcake(2.5), 3000); // Normal speed
-      setInterval(() => createFallingCupcake(1.0), 7000); // Some faster cupcakes
-      // --- End Falling Cupcake Effect ---
+
 
     </script>
   </div>
