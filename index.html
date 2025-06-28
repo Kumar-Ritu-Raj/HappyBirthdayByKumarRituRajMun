@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
   <meta name="description" content="HTML Script Birthday Gift">
   <meta property="og:title" content="Special Gift For You ✨">
-  <meta property="og:description" content="Hey Mun..., it's your birthday today 🫂">
+  <meta property="og:description" content="Hey Shivani..., it's your birthday today 🫂">
   <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhMDugl2siKVTnQUhkzqZXmNhnUl_IXm-tsnodgHf4C3dPn6v4gz06nVm1ASqpRXO65Dg3PkYB9bKsThBPUxygLD9Euem9SSTr0LRIGK9x5uaLvK4WIPn6VlSx0qSrPGhTknGVHeVMpioiBcXiqrk-dF3d4SYS8QIkWkDlMgRrdF4vw_iw-EOgTYcwo6xhs/s300/1000314955.jpg">
   <meta property="og:image:alt" content="hbd">
   <meta property="og:type" content="website">
@@ -26,7 +26,7 @@
   <audio src="./assets/angelbabydj.mp3" id="linkmp3" class="hidden" loop></audio>
   <div class="overlay">
     <div class="cover">
-      <p style="font-size:17px; font-weight:700; margin:0">Hi Birthday Girl <b>Mun...</b>👋 <br/> Something for you by Ritu 🥳 </p>
+      <p style="font-size:17px; font-weight:700; margin:0">Hi Birthday Girl <b>Shivani...</b>👋 <br/> Something for you by Kumar Ritu Raj🥳 </p>
       <div id="loveIn" class="initial">
         <svg class="line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <g transform="translate(2.000000, 2.000000)">
@@ -75,10 +75,10 @@
         st5.src,
       ];
       const texts = [
-        "<b style='font-size:20px'>Hey👋, Muno...! 😆</b><br><br><span class='altText'>It’s your birthday today 🫣 <br /> 26-05-2025💗</span><br><br><b><i>Happy Birthday!</i> 🥳</b>",
+        "<b style='font-size:20px'>Hey👋, Shivani...! 😆</b><br><br><span class='altText'>It’s your birthday today 🫣 <br /> 28-06-2025💗</span><br><br><b><i>Happy Birthday!</i> 🥳</b>",
         "Would you like a gift? 😆",
         "<span id='textStuck'><b style='font-size:20px'>Alright! 😆</b><br><br><span class='altText' style='line-height:1.5em'>On the count of <b style='color:yellow;'> 4 </b>, I will give you a<br> gift! 🥳 are you Excited 🤩</span></span><br><br><span id='teksTime'><b style='font-size:20px'>⏳ <span id='timerLeft'>1</span></b></span>",
-        "<b style='font-size:20px'>Happy Birthday Mun🫣</b><br><br><span class='altText' style='line-height:1.5em'>🤗🤗Wish You Many-Many Happy Returns of the Day 🤗🤗</span>",
+        "<b style='font-size:20px'>Happy Birthday Shivani🫣</b><br><br><span class='altText' style='line-height:1.5em'>🤗🤗Wish You Many-Many Happy Returns of the Day 🤗🤗</span>",
         "<span style='font-size:17px;font-weight:400'>Have A Great Life 🤩</span>",
       ];
 
@@ -193,9 +193,10 @@
         star.innerHTML = `<svg viewBox="0 0 24 24" fill="yellow"><polygon points="12,2 15,9 22,9.5 17,14.5 18.5,22 12,18 5.5,22 7,14.5 2,9.5 9,9"/></svg>`;
         document.body.appendChild(star);
         const duration = Math.random() * 1.5 + 2.5;
+        // Animate from bottom to top
         star.animate([
-          { transform: `translateY(0px)` },
-          { transform: `translateY(${window.innerHeight + 40}px)` }
+          { transform: `translateY(${window.innerHeight + 40}px)` },
+          { transform: `translateY(0px)` }
         ], {
           duration: duration * 1000,
           easing: 'linear',
