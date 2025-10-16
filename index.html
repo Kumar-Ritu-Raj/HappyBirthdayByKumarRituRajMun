@@ -1,505 +1,1243 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <title>WantGift</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-  <meta name="description" content="HTML Script Birthday Gift">
-  <meta property="og:title" content="Special Gift For You ✨">
-  <meta property="og:description" content="Hey Shivani..., it's your birthday today 🫂">
-  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhMDugl2siKVTnQUhkzqZXmNhnUl_IXm-tsnodgHf4C3dPn6v4gz06nVm1ASqpRXO65Dg3PkYB9bKsThBPUxygLD9Euem9SSTr0LRIGK9x5uaLvK4WIPn6VlSx0qSrPGhTknGVHeVMpioiBcXiqrk-dF3d4SYS8QIkWkDlMgRrdF4vw_iw-EOgTYcwo6xhs/s300/1000314955.jpg">
-  <meta property="og:image:alt" content="hbd">
-  <meta property="og:type" content="website">
-  
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="style.css">
-  <script src="https://unpkg.com/scrollreveal"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
-  <script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diwali & Chhath Puja Surprise</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Landing Page Styles */
+    .landing-page {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .input-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 50px 40px;
+      border-radius: 25px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      max-width: 450px;
+      width: 100%;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .input-container h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3em;
+      color: #ff6b35;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .input-container p {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+
+    .input-container input {
+      width: 100%;
+      padding: 15px 20px;
+      font-size: 1.1em;
+      border: 2px solid #ddd;
+      border-radius: 50px;
+      outline: none;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .input-container input:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .surprise-btn {
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 1.2em;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .surprise-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(255, 107, 53, 0.4);
+    }
+
+    .surprise-btn:active {
+      transform: translateY(-1px);
+    }
+
+    /* Celebration Page Styles */
+    .celebration-page {
+      display: none;
+      min-height: 100vh;
+      background: radial-gradient(circle at bottom, #1a1a2e, #0f0e17);
+      color: #ffe066;
+      padding: 20px;
+      position: relative;
+      /* allow decorative glows to extend outside the page container */
+      overflow: visible;
+    }
+
+    .celebration-page.active {
+      display: block;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .celebration-page h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px #ffde59, 0 0 40px #ffb347;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 20px #ffde59, 0 0 40px #ffb347;
+      }
+      to {
+        text-shadow: 0 0 30px #ffde59, 0 0 60px #ffb347, 0 0 80px #ff6b35;
+      }
+    }
+
+    .greeting {
+      font-size: 1.8em;
+      margin: 30px 0;
+      font-weight: 600;
+      text-shadow: 0 0 10px #fff3b0;
+      line-height: 1.6;
+    }
+
+    .user-name {
+      color: #ffb347;
+      font-size: 1.2em;
+      text-decoration: underline;
+      text-decoration-color: #ff6b35;
+    }
+
+    .images {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin: 50px 0;
+    }
+
+    .image-card {
+      position: relative;
+      border-radius: 20px;
+      /* allow the rotating light to appear around the card */
+      overflow: visible;
+      box-shadow: 0 0 30px rgba(255, 224, 102, 0.5);
+      transition: transform 0.4s ease;
+      animation: floatIn 1s ease-out;
+    }
+
+    .image-card:hover {
+      transform: scale(1.05) rotate(2deg);
+      box-shadow: 0 0 50px rgba(255, 179, 71, 0.8);
+    }
+
+    .image-card img {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      position: relative;
+      z-index: 2; /* above the rotating ring */
+      border-radius: 20px; /* match card rounding */
+    }
+
+    .image-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      padding: 15px;
+      font-weight: 600;
+      font-size: 1.2em;
+      position: relative;
+      z-index: 3; /* ensure label sits above the glow */
+    }
+
+    /* Rotating glowing ring around each image-card */
+    .image-card::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(0deg);
+      width: calc(100% + 120px);
+      height: calc(100% + 120px);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1; /* behind image and label */
+      background: conic-gradient(from 0deg, rgba(255,215,102,0.95), rgba(255,107,53,0.9), rgba(255,215,102,0.9));
+      filter: blur(14px) saturate(1.1);
+      opacity: 0.95;
+      mix-blend-mode: screen;
+      animation: rotateLight 9s linear infinite;
+      transition: opacity 0.4s ease;
+    }
+
+    @keyframes rotateLight {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to   { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Animation Container */
+    #animations {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      /* put animations behind content-wrapper but above background */
+      z-index: 2;
+      overflow: visible;
+    }
+
+    /* Rocket Animation */
+    .rocket {
+      position: absolute;
+      width: 10px;
+      height: 30px;
+      background: linear-gradient(180deg, #ff4e50, #f9d423);
+      border-radius: 50% 50% 0 0;
+      bottom: -50px;
+      animation: rocketFly 3s ease-out forwards;
+    }
+
+    .rocket::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 15px solid #f9d423;
+    }
+
+    @keyframes rocketFly {
+      0% {
+        bottom: -50px;
+        opacity: 1;
+      }
+      70% {
+        opacity: 1;
+      }
+      100% {
+        bottom: 110vh;
+        opacity: 0;
+      }
+    }
+
+    /* Diya (Lamp) Animation */
+    .diya {
+      position: absolute;
+      width: 40px;
+      height: 20px;
+      background: linear-gradient(180deg, #ff6b35, #f7931e);
+      border-radius: 0 0 50% 50%;
+      animation: diyaFloat 4s ease-in-out infinite;
+    }
+
+    .diya::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 20px solid #ffd700;
+      filter: blur(2px);
+      animation: flameFlicker 0.5s ease-in-out infinite;
+    }
+
+    @keyframes diyaFloat {
+      0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(5deg);
+      }
+    }
+
+    @keyframes flameFlicker {
+      0%, 100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+      }
+      50% {
+        opacity: 0.7;
+        transform: translateX(-50%) scale(1.1);
+      }
+    }
+
+    /* Sparkle Animation */
+    .sparkle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff, #ffd700);
+      box-shadow: 0 0 15px #ffea00;
+      animation: sparkleShine 2s ease-out forwards;
+    }
+
+    @keyframes sparkleShine {
+      0% {
+        opacity: 1;
+        transform: scale(0) rotate(0deg);
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: scale(2) rotate(360deg);
+      }
+    }
+
+    /* Firework Particle */
+    .firework-particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      animation: particleExplode 1.5s ease-out forwards;
+    }
+
+    @keyframes particleExplode {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(0);
+      }
+    }
+
+    /* Lotus Flower */
+    .lotus {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      animation: lotusFloat 5s ease-in-out infinite;
+    }
+
+    @keyframes lotusFloat {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      25% {
+        transform: translateY(-30px) rotate(5deg);
+      }
+      75% {
+        transform: translateY(-30px) rotate(-5deg);
+      }
+    }
+
+    /* Star Burst */
+    .star-burst {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(45deg, #ffd700, #ff6b35);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      animation: starRotate 3s linear infinite;
+    }
+
+    @keyframes starRotate {
+      0% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: rotate(360deg) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Rangoli Pattern */
+    .rangoli {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border: 3px solid #ff6b35;
+      border-radius: 50%;
+      animation: rangolSpin 6s linear infinite;
+    }
+
+    .rangoli::before, .rangoli::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 3px solid #ffd700;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+    }
+
+    .rangoli::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .rangoli::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    @keyframes rangolSpin {
+      0% {
+        transform: rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Birthday Animations */
+    .falling-star {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .falling-balloon {
+      position: absolute;
+      width: 40px;
+      height: 50px;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .falling-present {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .falling-partyhat {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .falling-heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .falling-smiley {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .heart-icon {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .input-container h1 {
+        font-size: 2.5em;
+      }
+      
+      .celebration-page h1 {
+        font-size: 2.5em;
+      }
+      
+      .greeting {
+        font-size: 1.3em;
+      }
+      
+      .image-card img {
+        width: 200px;
+        height: 200px;
+      }
+      /* Make the images stack and center on tablets/smaller */
+      .images {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        margin: 30px 0;
+      }
+      /* reduce rotating ring for better fit */
+      .image-card::before {
+        width: calc(100% + 60px);
+        height: calc(100% + 60px);
+        filter: blur(10px) saturate(1.05);
+        animation-duration: 7s;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .input-container {
+        padding: 30px 20px;
+      }
+      
+      .celebration-page h1 {
+        font-size: 2em;
+      }
+      
+      .greeting {
+        font-size: 1.1em;
+      }
+      
+      .image-card img {
+        width: 150px;
+        height: 150px;
+      }
+      .images {
+        flex-direction: column;
+        gap: 18px;
+        align-items: center;
+        margin: 20px 0;
+      }
+      /* mobile: make the ring much smaller and softer */
+      .image-card::before {
+        width: calc(100% + 30px);
+        height: calc(100% + 30px);
+        filter: blur(8px) saturate(1.02);
+        animation-duration: 6s;
+        opacity: 0.9;
+      }
+      /* Reduce large headings for small screens */
+      .input-container h1 { font-size: 2em; }
+      .celebration-page h1 { font-size: 1.8em; }
+    }
+
+    .big-rocket {
+      pointer-events: none;
+      animation: rocketGlow 1.8s linear;
+    }
+    @keyframes rocketGlow {
+      0% { filter: drop-shadow(0 0 10px #ff4e50); }
+      100% { filter: drop-shadow(0 0 40px #ffd700); }
+    }
+    .rocket-blast {
+      pointer-events: none;
+      animation: blastFade 0.8s linear;
+    }
+    @keyframes blastFade {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    .falling-spark {
+      pointer-events: none;
+      box-shadow: 0 0 12px #ffd700, 0 0 24px #fffbe6;
+    }
+
+    /* Thin Rocket Style */
+    .thin-rocket {
+      pointer-events: none;
+      animation: rocketGlowThin 1.2s linear;
+    }
+    @keyframes rocketGlowThin {
+      0% { filter: drop-shadow(0 0 8px #ff4e50); }
+      100% { filter: drop-shadow(0 0 32px #ffd700); }
+    }
+
+    /* Diwali Wish Page */
+    .diwali-wish-page {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at bottom, #fffbe6, #ffb347 80%);
+      z-index: 20;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .diwali-wish-page img {
+      width: 260px;
+      height: 260px;
+      border-radius: 20px;
+      box-shadow: 0 0 40px #ffb347;
+    }
+
+    .diwali-wish-page h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5em;
+      color: #ff6b35;
+      margin: 30px 0 10px;
+      text-shadow: 0 0 20px #ffde59;
+    }
+
+    .diwali-wish-page p {
+      font-size: 1.3em;
+      color: #333;
+      font-weight: 600;
+    }
+
+    #nextSurpriseBtn {
+      display: none;
+      position: absolute;
+      left: -220px;
+      bottom: 4vh;
+      padding: 18px 38px;
+      font-size: 1.3em;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+      transition: left 1s cubic-bezier(.6,1,.6,1);
+    }
+
+    /* Chhath Puja Wish Page */
+    .chhath-wish-page {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at bottom, #e0f7fa, #f9d423 80%);
+      z-index: 20;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .chhath-wish-page img {
+      width: 260px;
+      height: 260px;
+      border-radius: 20px;
+      box-shadow: 0 0 40px #f9d423;
+    }
+
+    .chhath-wish-page h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5em;
+      color: #f9d423;
+      margin: 30px 0 10px;
+      text-shadow: 0 0 20px #ffde59;
+    }
+
+    .chhath-wish-page p {
+      font-size: 1.3em;
+      color: #333;
+      font-weight: 600;
+    }
+
+    /* Hanging Button Animation */
+    .hanging-btn {
+      animation: hangingSwing 1.6s infinite alternate ease-in-out, btnGlow 1.2s infinite alternate;
+      transform-origin: top center;
+      position: relative;
+    }
+    @keyframes hangingSwing {
+      0% { transform: rotate(-8deg) translateX(-10px); }
+      50% { transform: rotate(8deg) translateX(10px); }
+      100% { transform: rotate(-8deg) translateX(-10px); }
+    }
+    @keyframes btnGlow {
+      0% {
+        box-shadow: 0 0 25px 8px #ffb347, 0 0 0px #fffbe6;
+        filter: brightness(1.1);
+      }
+      50% {
+        box-shadow: 0 0 45px 16px #ff6b35, 0 0 10px #fffbe6;
+        filter: brightness(1.3);
+      }
+      100% {
+        box-shadow: 0 0 25px 8px #ffb347, 0 0 0px #fffbe6;
+        filter: brightness(1.1);
+      }
+    }
   </style>
 </head>
-
 <body>
-  <audio src="./assets/angelbabydj.mp3" id="linkmp3" class="hidden" loop></audio>
-  <div class="overlay">
-    <div class="cover">
-      <p style="font-size:17px; font-weight:700; margin:0">Hi Birthday Girl <b>Shivani...</b>👋 <br/> Something for you by Kumar Ritu Raj🥳 </p>
-      <div id="loveIn" class="initial">
-        <svg class="line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <g transform="translate(2.000000, 2.000000)">
-            <path d="M9.27542857,0.714285714 C14.0030476,0.714285714 17.836381,4.54666667 17.836381,9.2752381 C17.836381,14.0038095 14.0030476,17.8361905 9.27542857,17.8361905 C4.54685714,17.8361905 0.71447619,14.0038095 0.71447619,9.2752381 C0.71447619,4.54666667 4.54685714,0.714285714 9.27542857,0.714285714 Z"></path>
-            <path d="M17.8989524,16.487619 C18.678,16.487619 19.3094286,17.12 19.3094286,17.8980952 C19.3094286,18.6780952 18.678,19.3095238 17.8989524,19.3095238 C17.1199048,19.3095238 16.4875238,18.6780952 16.4875238,17.8980952 C16.4875238,17.12 17.1199048,16.487619 17.8989524,16.487619 Z"></path>
-          </g>
-        </svg>
-        <label style="font-size:16px">Click me please....</label>
+
+  <!-- Landing Page -->
+  <div class="landing-page" id="landingPage">
+    <div class="input-container">
+      <h1>There is some Surprised for you by Kumar Ritu Raj 🪔</h1>
+      <p>Enter your name for a special surprise!</p>
+      <input 
+        type="text" 
+        id="userName" 
+        placeholder="Please enter your name . . ." 
+        autocomplete="off"
+      />
+      <button class="surprise-btn hanging-btn" onclick="showSurprise()">
+        ✨ Surprise Me! ✨
+      </button>
+    </div>
+  </div>
+
+  <!-- Celebration Page -->
+  <div class="celebration-page" id="celebrationPage">
+    <div id="animations"></div>
+    
+    <div class="content-wrapper">
+      <h1>Happy Diwali & Chhath Puja!</h1>
+      
+      <div class="greeting">
+        Hi <span class="user-name" id="displayName"></span><br>
+        May your life be filled with the divine light of prosperity, happiness, and success!<br>
+        Wishing you a blessed Diwali and Chhath Puja! 🙏✨
+      </div>
+
+      <div class="images">
+        <div class="image-card">
+          <img 
+            src="https://www.ucf.edu/wp-content/blogs.dir/20/files/2022/10/Diwali.jpg?w=400&h=400&fit=crop" 
+            alt="Diwali Celebration"
+          />
+          <div class="image-label">🪔 Diwali</div>
+        </div>
+        
+        <div class="image-card">
+          <img 
+            src="https://tse4.mm.bing.net/th/id/OIP.RtZvu84SZV--TR5Vn0RcZgHaGJ?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3?w=400&h=400&fit=crop" 
+            alt="Chhath Puja"
+          />
+          <div class="image-label">🌅 Chhath</div>
+        </div>
       </div>
     </div>
   </div>
-  
-  <div id="bodyblur">
-    <img src="./assets/wpeach.jpg" id="wallpaper" />
-  </div>
-  
-  <!-- Swiper -->
-  <div class="swiper">
-    <div class="mainMsg">
-      <div class="mainSt">
-        <img id="st1" src="./assets/cinta.gif" />
-        <img id="st2" src="./assets/cubit.gif" class="hidden" />
-        <img id="st3" src="./assets/terlope.gif" class="hidden" />
-        <img id="st4" src="./assets/ledekin.gif" class="hidden" />
-        <img id="st5" src="./assets/4.png" class="hidden" />
-      </div>
-      <span class="mainTxt"></span>
 
-      <div id="button">
-        <a id="By" class="blue" onClick="fnYes()">Yes</a>
-        <a id="Bn" class="red" onClick="fnNo()">No</a>
-      </div>
-
-      <div class="hidden">
-        <span id="textNo" class="hidden">Alright, if you don't want it 😜</span>
-        <img id="stickerNo" src="./assets/ledekin.gif" class="hidden" />
-      </div>
+  <!-- Diwali Wish Page -->
+  <div class="diwali-wish-page" id="diwaliWishPage" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:radial-gradient(circle at bottom, #fffbe6, #ffb347 80%); z-index:20; justify-content:center; align-items:center; flex-direction:column;">
+    <div style="text-align:center; margin-top:2vh;">
+            <h2 style="font-family:'Great Vibes',cursive; font-size:2.5em; color:#ff6b35; margin:30px 0 10px; text-shadow:0 0 20px #ffde59;">Happy Diwali🪔</h2>
+      <img src="https://www.ucf.edu/wp-content/blogs.dir/20/files/2022/10/Diwali.jpg?w=400&h=400&fit=crop" alt="Diwali" style="width:260px; height:260px; border-radius:20px; box-shadow:0 0 40px #ffb347;">
+      <p style="font-size:1.3em; color:#333; font-weight:600;">May your life be filled with light, joy, and prosperity!</p>
     </div>
-
-    <script>
-      const images = [
-        st1.src,
-        st2.src,
-        st3.src,
-        st4.src,
-        st5.src,
-      ];
-      const texts = [
-        "<b style='font-size:20px'>Hey👋, Shivani...! 😆</b><br><br><span class='altText'>It’s your birthday today 🫣 <br /> 28-06-2025💗</span><br><br><b><i>Happy Birthday!</i> 🥳</b>",
-        "Would you like a gift? 😆",
-        "<span id='textStuck'><b style='font-size:20px'>Alright! 😆</b><br><br><span class='altText' style='line-height:1.5em'>On the count of <b style='color:yellow;'> 4 </b>, I will give you a<br> gift! 🥳 are you Excited 🤩</span></span><br><br><span id='teksTime'><b style='font-size:20px'>⏳ <span id='timerLeft'>1</span></b></span>",
-        "<b style='font-size:20px'>Happy Birthday Shivani🫣</b><br><br><span class='altText' style='line-height:1.5em'>🤗🤗Wish You Many-Many Happy Returns of the Day 🤗🤗</span>",
-        "<span style='font-size:17px;font-weight:400'>Have A Great Life 🤩</span>",
-      ];
-
-      let currentIndex = 0;
-      var selectedButton = "";
-      const mainSt = document.querySelector('.mainSt');
-      const mainTxt = document.querySelector('.mainTxt');
-
-      function showElements() {
-        mainSt.style.transform = 'scale(1)';
-        mainTxt.style.transform = 'scale(1)';
-        setTimeout(() => { functionActive = true; }, 1000);
-      }
-
-      function nextSection(){
-        functionActive = false;
-        mainSt.style.transform = 'scale(0)';
-        mainTxt.style.transform = 'scale(0)';
-
-        setTimeout(() => {
-          currentIndex = (currentIndex + 1) % images.length;
-
-          if (currentIndex == 1) {
-            button.style = "position:relative;transform:scale(1);opacity:1";
-          }
-          if (currentIndex == 2) {
-            button.style = "";
-          }
-          if (currentIndex == 4) {
-            setTimeout(nextSection, 3500);
-          }
-          if (currentIndex == 5) {
-            mainTxt.innerHTML = "";
-            mainSt.querySelector('img').src = images[5];
-            setTimeout(() => { textAnimation(texts[currentIndex]) }, 200);
-          }
-
-          if (currentIndex < 5) {
-            mainSt.querySelector('img').src = images[currentIndex];
-            mainTxt.innerHTML = texts[currentIndex];
-          }
-
-          showElements();
-        }, 400);
-      }
-
-      function fnYes(){
-        selectedButton = "Blue";
-        button.style = "position:relative;";
-        nextSection();
-
-        setTimeout(() => {
-          const timerElement = document.getElementById('timerLeft');
-          let timeCount = 0;
-
-          const countdown = setInterval(() => {
-            timeCount++;
-            timerElement.textContent = timeCount;
-
-            if (timeCount >= 4) {
-              clearInterval(countdown);
-              setTimeout(() => {
-                mainSt.style.transform = 'scale(0)';
-                textStuck.style.opacity = '0';
-
-                setTimeout(function(){
-                  mainSt.querySelector('img').src = images[3];
-                }, 400);
-
-                setTimeout(function(){
-                  textStuck.innerHTML = texts[3];
-                  mainSt.style.transform = 'scale(1)';
-                  textStuck.style.opacity = '1';
-
-                  setTimeout(() => {
-                    mainSt.style.transform = 'scale(0)';
-                    teksTime.style.opacity = '0';
-
-                    setTimeout(function(){
-                      mainSt.querySelector('img').src = images[4];
-                    }, 400);
-
-                    setTimeout(function(){
-                      teksTime.innerHTML = texts[4];
-                      setInterval(falling, 200);
-                      mainSt.style.transform = 'scale(1)';
-                      teksTime.style.opacity = '1';
-                    }, 450);
-                  }, 2400);
-
-                }, 450);
-              }, 2300);
-
-            }
-          }, 1000);
-        }, 800);
-      }
-
-      function fnNo(){
-        doNotWant();
-      }
-
-      // --- Falling Star Effect (JS) ---
-      function createFallingStar() {
-        const star = document.createElement('div');
-        star.className = 'falling-star';
-        const size = Math.random() * 8 + 6;
-        star.style.width = size + 'px';
-        star.style.height = size + 'px';
-        star.style.left = Math.random() * 98 + 'vw';
-        star.style.opacity = (Math.random() * 0.5 + 0.5).toFixed(2);
-        star.innerHTML = `<svg viewBox="0 0 24 24" fill="yellow"><polygon points="12,2 15,9 22,9.5 17,14.5 18.5,22 12,18 5.5,22 7,14.5 2,9.5 9,9"/></svg>`;
-        document.body.appendChild(star);
-        const duration = Math.random() * 1.5 + 2.5;
-        // Animate from bottom to top
-        star.animate([
-          { transform: `translateY(${window.innerHeight + 40}px)` },
-          { transform: `translateY(0px)` }
-        ], {
-          duration: duration * 1000,
-          easing: 'linear',
-          fill: 'forwards'
-        });
-        setTimeout(() => {
-          star.remove();
-        }, duration * 1000);
-      }
-      setInterval(createFallingStar, 350);
-      // --- End Falling Star Effect ---
-
-      // --- Falling Balloon Effect (JS) ---
-      function createFallingBalloon(speed = 1.2) {
-        const balloon = document.createElement('div');
-        balloon.className = 'falling-balloon';
-        const size = Math.random() * 18 + 22; // 22px to 40px
-        balloon.style.width = size + 'px';
-        balloon.style.height = size + 'px';
-        balloon.style.left = Math.random() * 98 + 'vw';
-        balloon.style.opacity = (Math.random() * 0.5 + 0.7).toFixed(2);
-        // Random color for each balloon
-        const colors = ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        balloon.innerHTML = `<svg viewBox='0 0 32 48'><ellipse cx='16' cy='20' rx='14' ry='18' fill='${color}'/><rect x='14' y='38' width='4' height='8' rx='2' fill='#888'/><path d='M16 38 Q18 44 16 46 Q14 44 16 38' stroke='#888' stroke-width='1.5' fill='none'/></svg>`;
-        document.body.appendChild(balloon);
-        const duration = (Math.random() * 1.5 + speed + 1.5); // 2.7s to 4.7s
-        balloon.animate([
-          { transform: `translateY(0px)` },
-          { transform: `translateY(${window.innerHeight + 40}px)` }
-        ], {
-          duration: duration * 1000,
-          easing: 'linear',
-          fill: 'forwards'
-        });
-        setTimeout(() => {
-          balloon.remove();
-        }, duration * 1000);
-      }
-      // Example: createFallingBalloon(1.2) for normal, createFallingBalloon(0.5) for faster
-      setInterval(() => createFallingBalloon(1.2), 1200);
-      setInterval(() => createFallingBalloon(0.5), 3000);
-      // --- End Falling Balloon Effect ---
-
-      // --- Falling Present Effect (JS) ---
-      function createFallingPresent(speed = 1.5) {
-        const present = document.createElement('div');
-        present.className = 'falling-present';
-        const size = Math.random() * 16 + 24; // 24px to 40px
-        present.style.width = size + 'px';
-        present.style.height = size + 'px';
-        present.style.left = Math.random() * 98 + 'vw';
-        present.style.opacity = (Math.random() * 0.5 + 0.7).toFixed(2);
-        // Random color for each present
-        const colors = ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        present.innerHTML = `<svg viewBox='0 0 32 32'><rect x='4' y='12' width='24' height='16' rx='4' fill='${color}'/><rect x='14' y='12' width='4' height='16' fill='#fff'/><rect x='4' y='12' width='24' height='4' fill='#fff'/><circle cx='10' cy='12' r='4' fill='${color}'/><circle cx='22' cy='12' r='4' fill='${color}'/></svg>`;
-        document.body.appendChild(present);
-        const duration = (Math.random() * 1.5 + speed + 1.5); // 2.7s to 4.7s
-        present.animate([
-          { transform: `translateY(0px)` },
-          { transform: `translateY(${window.innerHeight + 40}px)` }
-        ], {
-          duration: duration * 1000,
-          easing: 'linear',
-          fill: 'forwards'
-        });
-        setTimeout(() => {
-          present.remove();
-        }, duration * 1000);
-      }
-      setInterval(() => createFallingPresent(1.5), 1800);
-      setInterval(() => createFallingPresent(0.7), 4000); 
-
-
-      // --- Falling Party Hat Effect (JS) ---
-      function createFallingPartyHat(speed = 1.0) {
-        const hat = document.createElement('div');
-        hat.className = 'falling-partyhat';
-        const size = Math.random() * 12 + 20; // 20px to 32px
-        hat.style.width = size + 'px';
-        hat.style.height = size + 'px';
-        hat.style.left = Math.random() * 98 + 'vw';
-        hat.style.opacity = (Math.random() * 0.5 + 0.7).toFixed(2);
-        // Random color for hat
-        const colors = ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        hat.innerHTML = `<svg viewBox='0 0 32 32'><polygon points='16,2 30,30 2,30' fill='${color}'/><circle cx='16' cy='2' r='3' fill='#fff'/></svg>`;
-        document.body.appendChild(hat);
-        const duration = (Math.random() * 1.5 + speed + 1.5); // 2.5s to 4.5s
-        hat.animate([
-          { transform: `translateY(0px)` },
-          { transform: `translateY(${window.innerHeight + 40}px)` }
-        ], {
-          duration: duration * 1000,
-          easing: 'linear',
-          fill: 'forwards'
-        });
-        setTimeout(() => {
-          hat.remove();
-        }, duration * 1000);
-      }
-      setInterval(() => createFallingPartyHat(1.0), 2000);
-      setInterval(() => createFallingPartyHat(0.5), 5000);
-      // --- End Falling Party Hat Effect ---
-
-      // --- Falling Heart Effect (JS) ---
-      function createFallingHeart(speed = 1.7) {
-        const heart = document.createElement('div');
-        heart.className = 'falling-heart';
-        const size = Math.random() * 10 + 18; // 18px to 28px
-        heart.style.width = size + 'px';
-        heart.style.height = size + 'px';
-        heart.style.left = Math.random() * 98 + 'vw';
-        heart.style.opacity = (Math.random() * 0.5 + 0.7).toFixed(2);
-        heart.innerHTML = `<svg viewBox='0 0 32 32'><path d='M23.6,4.6c-2.6,0-4.9,1.7-5.6,4.1C16.3,6.3,14,4.6,11.4,4.6C7.3,4.6,4,7.9,4,12c0,7.2,12,15.4,12,15.4s12-8.2,12-15.4C28,7.9,24.7,4.6,23.6,4.6z' fill='#ff6384'/></svg>`;
-        document.body.appendChild(heart);
-        const duration = (Math.random() * 1.5 + speed + 1.5); // 2.7s to 4.7s
-        heart.animate([
-          { transform: `translateY(0px)` },
-          { transform: `translateY(${window.innerHeight + 40}px)` }
-        ], {
-          duration: duration * 1000,
-          easing: 'linear',
-          fill: 'forwards'
-        });
-        setTimeout(() => {
-          heart.remove();
-        }, duration * 1000);
-      }
-      setInterval(() => createFallingHeart(1.7), 1700); 
-      setInterval(() => createFallingHeart(0.7), 4000); 
-      // --- End Falling Heart Effect ---
-
-      // --- Falling Smiley Face Effect (JS) ---
-      function createFallingSmiley(speed = 2.0) {
-        const smiley = document.createElement('div');
-        smiley.className = 'falling-smiley';
-        const size = Math.random() * 12 + 22; // 22px to 34px
-        smiley.style.width = size + 'px';
-        smiley.style.height = size + 'px';
-        smiley.style.left = Math.random() * 98 + 'vw';
-        smiley.style.opacity = (Math.random() * 0.5 + 0.7).toFixed(2);
-        smiley.innerHTML = `<svg viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='#ffe066' stroke='#e1b800' stroke-width='2'/><circle cx='11' cy='14' r='2' fill='#333'/><circle cx='21' cy='14' r='2' fill='#333'/><path d='M11 21 Q16 26 21 21' stroke='#333' stroke-width='2' fill='none'/></svg>`;
-        document.body.appendChild(smiley);
-        const duration = (Math.random() * 1.5 + speed + 1.5); // 3s to 5s
-        smiley.animate([
-          { transform: `translateY(0px)` },
-          { transform: `translateY(${window.innerHeight + 40}px)` }
-        ], {
-          duration: duration * 1000,
-          easing: 'linear',
-          fill: 'forwards'
-        });
-        setTimeout(() => {
-          smiley.remove();
-        }, duration * 1000);
-      }
-      setInterval(() => createFallingSmiley(2.0), 2200); 
-      setInterval(() => createFallingSmiley(0.8), 5000);
-      // --- End Falling Smiley Face Effect ---
-
-
-
-    </script>
+    <button id="nextSurpriseBtn" class="hanging-btn" style="display:none; position:absolute; left:-220px; bottom:4vh; padding:18px 38px; font-size:1.3em; font-weight:700; color:white; background:linear-gradient(135deg,#ff6b35,#f7931e); border:none; border-radius:50px; cursor:pointer; box-shadow:0 10px 25px rgba(255,107,53,0.3); transition:left 1s cubic-bezier(.6,1,.6,1);">Next Surprise →</button>
   </div>
-  
-  <!-- Box elements animation -->
-  <div>
-    <div class="swrapper">
-      <div class="box">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+
+  <!-- Chhath Puja Wish Page -->
+  <div class="chhath-wish-page" id="chhathWishPage" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:radial-gradient(circle at bottom, #e0f7fa, #f9d423 80%); z-index:20; justify-content:center; align-items:center; flex-direction:column;">
+    <div style="text-align:center; margin-top:2vh;">
+            <h2 style="font-family:'Great Vibes',cursive; font-size:2.5em; color:#f9d423; margin:30px 0 10px; text-shadow:0 0 20px #ffde59;">Happy Chhath Puja!</h2>
+      <img src="https://tse4.mm.bing.net/th/id/OIP.RtZvu84SZV--TR5Vn0RcZgHaGJ?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3?w=400&h=400&fit=crop" alt="Chhath Puja" style="width:260px; height:260px; border-radius:20px; box-shadow:0 0 40px #f9d423;">
+      <p style="font-size:1.3em; color:#333; font-weight:600;">Wishing you blessings of the Sun God and purity in life!</p>
     </div>
   </div>
+
+  <audio id="diwaliAudio" src="./assets/diwali.mp3"></audio>
+  <audio id="surpriseAudio" src="./assets/sitali_bayariya.mp3"></audio>
 
   <script>
-    document.addEventListener("click", function (e) {
-      const circle = document.createElement("div");
-      circle.classList.add("click-effect");
-      circle.style.left = `${e.pageX}px`;
-      circle.style.top = `${e.pageY}px`;
-      document.body.appendChild(circle);
-      circle.addEventListener("animationend", () => {
-        circle.remove();
+    const animations = [
+      'rocket',
+      'diya',
+      'sparkle',
+      'firework',
+      'lotus',
+      'starBurst',
+      'rangoli'
+    ];
+
+    // Make the audio loop
+    const diwaliAudio = document.getElementById('diwaliAudio');
+    const surpriseAudio = document.getElementById('surpriseAudio');
+    diwaliAudio.loop = true;
+    surpriseAudio.loop = true;
+
+    function showSurprise() {
+      const nameInput = document.getElementById('userName');
+      const name = nameInput.value.trim();
+      if (!name) {
+        alert('Please enter your name! 😊');
+        nameInput.focus();
+        return;
+      }
+      document.getElementById('displayName').textContent = name;
+      document.getElementById('landingPage').style.display = 'none';
+      document.getElementById('celebrationPage').classList.remove('active');
+      // Hide rocket animations during wish page
+      hideRocketAnimations();
+      // Show Diwali Wish Page
+      document.getElementById('diwaliWishPage').style.display = 'flex';
+      // Play diwali audio in loop
+      diwaliAudio.currentTime = 0;
+      diwaliAudio.play();
+      // Show Next Surprise button after 15 seconds
+      setTimeout(function() {
+        const btn = document.getElementById('nextSurpriseBtn');
+        btn.style.display = 'block';
+        setTimeout(() => { btn.style.left = 'calc(50vw - 110px)'; }, 100); // slide in
+      }, 15000);
+    }
+
+    // Next Surprise button click handler
+    document.getElementById('nextSurpriseBtn').onclick = function() {
+      // Stop diwali song
+      diwaliAudio.pause();
+      diwaliAudio.currentTime = 0;
+      diwaliAudio.loop = false;
+      // Play next song
+      surpriseAudio.currentTime = 0;
+      surpriseAudio.play();
+      document.getElementById('diwaliWishPage').style.display = 'none';
+      document.getElementById('chhathWishPage').style.display = 'flex';
+      // Hide rocket animations during chhath wish page
+      hideRocketAnimations();
+      // After 3.5s, show main celebration page
+      setTimeout(() => {
+        document.getElementById('chhathWishPage').style.display = 'none';
+        document.getElementById('celebrationPage').classList.add('active');
+        // Restore rocket animations
+        showRocketAnimations();
+      }, 3500);
+    }
+
+    function hideRocketAnimations() {
+      // Remove all rocket and thin-rocket elements from the animation container
+      const container = document.getElementById('animations');
+      container.querySelectorAll('.rocket, .thin-rocket').forEach(el => el.remove());
+    }
+    function showRocketAnimations() {
+      // No-op: rockets will continue as normal after wish pages
+      // If you want to restart, you could call startRepeatingRockets() here
+    }
+
+    function startRepeatingRockets() {
+      launchDoubleThinRocketsAndBlast(); // first launch immediately
+      setInterval(launchDoubleThinRocketsAndBlast, 4000); // repeat every 4 seconds
+    }
+
+    function launchDoubleThinRocketsAndBlast() {
+      const container = document.getElementById('animations');
+      // Left thin rocket
+      launchThinRocketAndBlast(container, window.innerWidth * 0.18);
+      // Right thin rocket
+      launchThinRocketAndBlast(container, window.innerWidth * 0.82 - getRocketWidth());
+    }
+
+    function getRocketWidth() {
+      return window.innerWidth < 500 ? 16 : 24;
+    }
+
+    function getRocketHeight() {
+      return window.innerWidth < 500 ? 54 : 80;
+    }
+
+    function launchThinRocketAndBlast(container, left) {
+      const rocketWidth = getRocketWidth();
+      const rocketHeight = getRocketHeight();
+      const rocket = document.createElement('div');
+      rocket.className = 'thin-rocket';
+      rocket.style.position = 'absolute';
+      rocket.style.left = left + 'px';
+      rocket.style.bottom = '-60px';
+      rocket.style.width = rocketWidth + 'px';
+      rocket.style.height = rocketHeight + 'px';
+      rocket.style.zIndex = '10';
+      rocket.innerHTML = `<svg viewBox='0 0 ${rocketWidth} ${rocketHeight}' width='${rocketWidth}' height='${rocketHeight}'>
+    <rect x='${rocketWidth/3}' y='${rocketHeight/4}' width='${rocketWidth/3}' height='${rocketHeight/2}' rx='${rocketWidth/6}' fill='url(#bodyGradThin)'/>
+    <polygon points='${rocketWidth/2},4 ${rocketWidth-4},${rocketHeight/4} 4,${rocketHeight/4}' fill='#ff4e50'/>
+    <ellipse cx='${rocketWidth/2}' cy='${rocketHeight-12}' rx='${rocketWidth/3}' ry='${rocketWidth/4}' fill='#f9d423'/>
+    <defs>
+      <linearGradient id='bodyGradThin' x1='0' y1='0' x2='0' y2='1'>
+        <stop offset='0%' stop-color='#ff4e50'/>
+        <stop offset='100%' stop-color='#f9d423'/>
+      </linearGradient>
+    </defs>
+  </svg>`;
+      container.appendChild(rocket);
+      // Animate rocket up higher
+      rocket.animate([
+        { transform: `translateY(0)` },
+        { transform: `translateY(-${window.innerHeight * 0.95}px)` }
+      ], {
+        duration: 1800,
+        easing: 'cubic-bezier(0.4,1,0.6,1)',
+        fill: 'forwards'
       });
-    });
-    const body = document.querySelector("body");
-    audio = new Audio('' + linkmp3.src);
-    button = document.querySelector('#button');
-
-    function textAnimation(textString){
-      mainTxt.innerHTML = "";
-      new TypeIt(mainTxt, {
-        strings: [textString],
-        startDelay: 50,
-        speed: 27,
-        cursor: true,
-        waitUntilVisible: true,
-        afterComplete: function(){
-          const cursorElement = document.querySelector(".mainTxt .ti-cursor");
-          if (cursorElement) {
-            cursorElement.style.display = "none";
-          }
-          
-          if (currentIndex == 0) {
-            setTimeout(nextSection, 1800);
-          }
-        },
-      }).go();
+      setTimeout(() => {
+        rocketBlastAt(rocket, left + rocketWidth/2, window.innerHeight * 0.05);
+      }, 1700);
     }
 
-    var alreadyClicked = true;
-    var functionActive = false;
-
-    document.getElementById("loveIn").onclick = function() {
-      if (alreadyClicked) {
-        document.querySelector(".cover").style = "opacity:0;transition:all .8s ease";
-        document.querySelector(".overlay").style = "opacity:0;transition:all .8s ease";
-        setTimeout(function(){
-          audio.play();
-          document.querySelector(".overlay").style.display = "none";
-          wallpaper.style = "transform:scale(1)";
-          document.querySelector(".mainMsg").style = "transform:scale(1)";
-          
-          setTimeout(() => { showElements() }, 300);
-          setTimeout(() => { textAnimation(texts[currentIndex]) }, 300);
-          
-          setTimeout(function(){ functionActive = true; }, 300);
-        }, 500);
-      } else {
-        alreadyClicked = true; // Mark button as clicked
-        document.getElementById('loveIn').innerHTML = '<style>.loveIn svg{animation:none;stroke:#ff0000;stroke-width:1.3;fill:none;width:35px;height:35px}</style><label class="loveIn"><svg class="line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g transform="translate(2.550170, 3.550158)"><path d="M0.371729633,8.89614246 C-0.701270367,5.54614246 0.553729633,1.38114246 4.07072963,0.249142462 C5.92072963,-0.347857538 8.20372963,0.150142462 9.50072963,1.93914246 C10.7237296,0.0841424625 13.0727296,-0.343857538 14.9207296,0.249142462 C18.4367296,1.38114246 19.6987296,5.54614246 18.6267296,8.89614246 C16.9567296,14.2061425 11.1297296,16.9721425 9.50072963,16.9721425 C7.87272963,16.9721425 2.09772963,14.2681425 0.371729633,8.89614246 Z"></path><path d="M13.23843,4.013842 C14.44543,4.137842 15.20043,5.094842 15.15543,6.435842"></path></g></svg></label><p id="note">Touch the LOVE!</p>';
+    function rocketBlastAt(rocket, x, y) {
+      // Show blast effect
+      const blast = document.createElement('div');
+      blast.className = 'rocket-blast';
+      blast.style.position = 'absolute';
+      blast.style.left = (x - 60) + 'px';
+      blast.style.top = y + 'px';
+      blast.style.width = '120px';
+      blast.style.height = '120px';
+      blast.style.zIndex = '11';
+      blast.innerHTML = `<svg viewBox='0 0 120 120' width='120' height='120'>
+    <circle cx='60' cy='60' r='40' fill='gold' opacity='0.7'/>
+    <circle cx='60' cy='60' r='60' fill='orange' opacity='0.3'/>
+  </svg>`;
+      document.getElementById('animations').appendChild(blast);
+      setTimeout(() => blast.remove(), 800);
+      rocket.remove();
+      // Create falling sparks
+      for (let i = 0; i < 40; i++) {
+        createFallingSpark(x, y);
       }
     }
 
-    function falling() {
-      const heart = document.createElement("div");
-      heart.innerHTML = "<svg class='line spin' style='opacity:.5;z-index:100;stroke:#FFC2B8' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(2.550170, 3.550158)'><path d='M0.371729633,8.89614246 C-0.701270367,5.54614246 0.553729633,1.38114246 4.07072963,0.249142462 C5.92072963,-0.347857538 8.20372963,0.150142462 9.50072963,1.93914246 C10.7237296,0.0841424625 13.0727296,-0.343857538 14.9207296,0.249142462 C18.4367296,1.38114246 19.6987296,5.54614246 18.6267296,8.89614246 C16.9567296,14.2061425 11.1297296,16.9721425 9.50072963,16.9721425 C7.87272963,16.9721425 2.09772963,14.2681425 0.371729633,8.89614246 Z'></path><path d='M13.23843,4.013842 C14.44543,4.137842 15.20043,5.094842 15.15543,6.435842'></path></g></svg>";
-      heart.className = "heart-icon";
-      heart.style.left = (Math.random() * 95) + "vw";
-      heart.style.animationDuration = (Math.random() * 3) + 2 + "s";
-      document.body.appendChild(heart);
+    // --- Birthday Animations ---
+function createFallingStar() {
+  const star = document.createElement('div');
+  star.className = 'falling-star';
+  const size = window.innerWidth < 500 ? Math.random() * 5 + 4 : Math.random() * 8 + 6;
+  star.style.width = size + 'px';
+  star.style.height = size + 'px';
+  const startLeft = Math.random() * window.innerWidth;
+  star.style.left = startLeft + 'px';
+  star.style.top = '0px';
+  star.style.opacity = (Math.random() * 0.5 + 0.5).toFixed(2);
+  star.innerHTML = `<svg viewBox="0 0 24 24" fill="yellow"><polygon points="12,2 15,9 22,9.5 17,14.5 18.5,22 12,18 5.5,22 7,14.5 2,9.5 9,9"/></svg>`;
+  document.getElementById('animations').appendChild(star);
+  // Diagonal fall
+  const angle = Math.random() * 0.6 - 0.3; // -0.3 to 0.3 radians
+  const distance = window.innerHeight + 100;
+  const endLeft = startLeft + Math.tan(angle) * distance;
+  const duration = window.innerWidth < 500 ? 2.2 : Math.random() * 1.5 + 2.5;
+  star.animate([
+    { transform: `translate(0,0)` },
+    { transform: `translate(${endLeft - startLeft}px,${distance}px)` }
+  ], {
+    duration: duration * 1000,
+    easing: 'linear',
+    fill: 'forwards'
+  });
+  setTimeout(() => star.remove(), duration * 1000 + 2000);
+}
+
+function createFallingBalloon(speed = 1.2) {
+  const balloon = document.createElement('div');
+  balloon.className = 'falling-balloon';
+  const size = window.innerWidth < 500 ? Math.random() * 10 + 15 : Math.random() * 18 + 22;
+  balloon.style.width = size + 'px';
+  balloon.style.height = size + 'px';
+  const startLeft = Math.random() * window.innerWidth;
+  balloon.style.left = startLeft + 'px';
+  balloon.style.top = '0px';
+  balloon.style.opacity = (Math.random() * 0.5 + 0.7).toFixed(2);
+  const colors = ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40'];
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  balloon.innerHTML = `<svg viewBox='0 0 32 48'><ellipse cx='16' cy='20' rx='14' ry='18' fill='${color}'/><rect x='14' y='38' width='4' height='8' rx='2' fill='#888'/><path d='M16 38 Q18 44 16 46 Q14 44 16 38' stroke='#888' stroke-width='1.5' fill='none'/></svg>`;
+  document.getElementById('animations').appendChild(balloon);
+  const angle = Math.random() * 0.6 - 0.3;
+  const distance = window.innerHeight + 100;
+  const endLeft = startLeft + Math.tan(angle) * distance;
+  const duration = window.innerWidth < 500 ? 2.5 : (Math.random() * 1.5 + speed + 1.5);
+  balloon.animate([
+    { transform: `translate(0,0)` },
+    { transform: `translate(${endLeft - startLeft}px,${distance}px)` }
+  ], {
+    duration: duration * 1000,
+    easing: 'linear',
+    fill: 'forwards'
+  });
+  setTimeout(() => balloon.remove(), duration * 1000 + 2000);
+}
+
+function createFallingPresent(speed = 1.5) {
+  const present = document.createElement('div');
+  present.className = 'falling-present';
+  const size = window.innerWidth < 500 ? Math.random() * 12 + 18 : Math.random() * 16 + 24;
+  present.style.width = size + 'px';
+  present.style.height = size + 'px';
+  const startLeft = Math.random() * window.innerWidth;
+  present.style.left = startLeft + 'px';
+  present.style.top = '0px';
+  present.style.opacity = (Math.random() * 0.5 + 0.7).toFixed(2);
+  const colors = ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40'];
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  present.innerHTML = `<svg viewBox='0 0 32 32'><rect x='4' y='12' width='24' height='16' rx='4' fill='${color}'/><rect x='14' y='12' width='4' height='16' fill='#fff'/><rect x='4' y='12' width='24' height='4' fill='#fff'/><circle cx='10' cy='12' r='4' fill='${color}'/><circle cx='22' cy='12' r='4' fill='${color}'/></svg>`;
+  document.getElementById('animations').appendChild(present);
+  const angle = Math.random() * 0.6 - 0.3;
+  const distance = window.innerHeight + 100;
+  const endLeft = startLeft + Math.tan(angle) * distance;
+  const duration = window.innerWidth < 500 ? 2.5 : (Math.random() * 1.5 + speed + 1.5);
+  present.animate([
+    { transform: `translate(0,0)` },
+    { transform: `translate(${endLeft - startLeft}px,${distance}px)` }
+  ], {
+    duration: duration * 1000,
+    easing: 'linear',
+    fill: 'forwards'
+  });
+  setTimeout(() => present.remove(), duration * 1000 + 2000);
+}
+
+function createFallingPartyHat(speed = 1.0) {
+  const hat = document.createElement('div');
+  hat.className = 'falling-partyhat';
+  const size = window.innerWidth < 500 ? Math.random() * 8 + 12 : Math.random() * 12 + 20;
+  hat.style.width = size + 'px';
+  hat.style.height = size + 'px';
+  const startLeft = Math.random() * window.innerWidth;
+  hat.style.left = startLeft + 'px';
+  hat.style.top = '0px';
+  hat.style.opacity = (Math.random() * 0.5 + 0.7).toFixed(2);
+  const colors = ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40'];
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  hat.innerHTML = `<svg viewBox='0 0 32 32'><polygon points='16,2 30,30 2,30' fill='${color}'/><circle cx='16' cy='2' r='3' fill='#fff'/></svg>`;
+  document.getElementById('animations').appendChild(hat);
+  const angle = Math.random() * 0.6 - 0.3;
+  const distance = window.innerHeight + 100;
+  const endLeft = startLeft + Math.tan(angle) * distance;
+  const duration = window.innerWidth < 500 ? 2.2 : (Math.random() * 1.5 + speed + 1.5);
+  hat.animate([
+    { transform: `translate(0,0)` },
+    { transform: `translate(${endLeft - startLeft}px,${distance}px)` }
+  ], {
+    duration: duration * 1000,
+    easing: 'linear',
+    fill: 'forwards'
+  });
+  setTimeout(() => hat.remove(), duration * 1000 + 2000);
+}
+
+function createFallingHeart(speed = 1.7) {
+  const heart = document.createElement('div');
+  heart.className = 'falling-heart';
+  const size = window.innerWidth < 500 ? Math.random() * 7 + 10 : Math.random() * 10 + 18;
+  heart.style.width = size + 'px';
+  heart.style.height = size + 'px';
+  const startLeft = Math.random() * window.innerWidth;
+  heart.style.left = startLeft + 'px';
+  heart.style.top = '0px';
+  heart.style.opacity = (Math.random() * 0.5 + 0.7).toFixed(2);
+  heart.innerHTML = `<svg viewBox='0 0 32 32'><path d='M23.6,4.6c-2.6,0-4.9,1.7-5.6,4.1C16.3,6.3,14,4.6,11.4,4.6C7.3,4.6,4,7.9,4,12c0,7.2,12,15.4,12,15.4s12-8.2,12-15.4C28,7.9,24.7,4.6,23.6,4.6z' fill='#ff6384'/></svg>`;
+  document.getElementById('animations').appendChild(heart);
+  const angle = Math.random() * 0.6 - 0.3;
+  const distance = window.innerHeight + 100;
+  const endLeft = startLeft + Math.tan(angle) * distance;
+  const duration = window.innerWidth < 500 ? 2.2 : (Math.random() * 1.5 + speed + 1.5);
+  heart.animate([
+    { transform: `translate(0,0)` },
+    { transform: `translate(${endLeft - startLeft}px,${distance}px)` }
+  ], {
+    duration: duration * 1000,
+    easing: 'linear',
+    fill: 'forwards'
+  });
+  setTimeout(() => heart.remove(), duration * 1000 + 2000);
+}
+
+function createFallingSmiley(speed = 2.0) {
+  const smiley = document.createElement('div');
+  smiley.className = 'falling-smiley';
+  const size = window.innerWidth < 500 ? Math.random() * 10 + 15 : Math.random() * 12 + 22;
+  smiley.style.width = size + 'px';
+  smiley.style.height = size + 'px';
+  const startLeft = Math.random() * window.innerWidth;
+  smiley.style.left = startLeft + 'px';
+  smiley.style.top = '0px';
+  smiley.style.opacity = (Math.random() * 0.5 + 0.7).toFixed(2);
+  smiley.innerHTML = `<svg viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='#ffe066' stroke='#e1b800' stroke-width='2'/><circle cx='11' cy='14' r='2' fill='#333'/><circle cx='21' cy='14' r='2' fill='#333'/><path d='M11 21 Q16 26 21 21' stroke='#333' stroke-width='2' fill='none'/></svg>`;
+  document.getElementById('animations').appendChild(smiley);
+  const angle = Math.random() * 0.6 - 0.3;
+  const distance = window.innerHeight + 100;
+  const endLeft = startLeft + Math.tan(angle) * distance;
+  const duration = window.innerWidth < 500 ? 2.2 : (Math.random() * 1.5 + speed + 1.5);
+  smiley.animate([
+    { transform: `translate(0,0)` },
+    { transform: `translate(${endLeft - startLeft}px,${distance}px)` }
+  ], {
+    duration: duration * 1000,
+    easing: 'linear',
+    fill: 'forwards'
+  });
+  setTimeout(() => smiley.remove(), duration * 1000 + 2000);
+}
+
+function createHeartIcon() {
+  const heart = document.createElement("div");
+  heart.innerHTML = "<svg class='line spin' style='opacity:.5;z-index:100;stroke:#FFC2B8' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(2.550170, 3.550158)'><path d='M0.371729633,8.89614246 C-0.701270367,5.54614246 0.553729633,1.38114246 4.07072963,0.249142462 C5.92072963,-0.347857538 8.20372963,0.150142462 9.50072963,1.93914246 C10.7237296,0.0841424625 13.0727296,-0.343857538 14.9207296,0.249142462 C18.4367296,1.38114246 19.6987296,5.54614246 18.6267296,8.89614246 C16.9567296,14.2061425 11.1297296,16.9721425 9.50072963,16.9721425 C7.87272963,16.9721425 2.09772963,14.2681425 0.371729633,8.89614246 Z'></path><path d='M13.23843,4.013842 C14.44543,4.137842 15.20043,5.094842 15.15543,6.435842'></path></g></svg>";
+  heart.className = "heart-icon";
+  heart.style.left = (Math.random() * 95) + "vw";
+  heart.style.animationDuration = (Math.random() * 3) + 2 + "s";
+  document.getElementById('animations').appendChild(heart);
+  setTimeout(() => heart.remove(), 7000);
+}
+
+// --- End Birthday Animations ---
+
+// Add new animation types to the pool
+const allAnimations = [
+  ...animations, // original Diwali animations
+  'fallingStar',
+  'fallingBalloon',
+  'fallingPresent',
+  'fallingPartyHat',
+  'fallingHeart',
+  'fallingSmiley',
+  'heartIcon'
+];
+
+function createRandomAnimation(type) {
+  switch(type) {
+    case 'rocket':
+      createRocket(document.getElementById('animations'));
+      break;
+    case 'diya':
+      createDiya(document.getElementById('animations'));
+      break;
+    case 'sparkle':
+      createSparkle(document.getElementById('animations'));
+      break;
+    case 'firework':
+      createFirework(document.getElementById('animations'));
+      break;
+    case 'lotus':
+      createLotus(document.getElementById('animations'));
+      break;
+    case 'starBurst':
+      createStarBurst(document.getElementById('animations'));
+      break;
+    case 'rangoli':
+      createRangoli(document.getElementById('animations'));
+      break;
+    case 'fallingStar':
+      createFallingStar();
+      break;
+    case 'fallingBalloon':
+      createFallingBalloon();
+      break;
+    case 'fallingPresent':
+      createFallingPresent();
+      break;
+    case 'fallingPartyHat':
+      createFallingPartyHat();
+      break;
+    case 'fallingHeart':
+      createFallingHeart();
+      break;
+    case 'fallingSmiley':
+      createFallingSmiley();
+      break;
+    case 'heartIcon':
+      createHeartIcon();
+      break;
+  }
+}
+
+function startAnimations(name) {
+  const animationCount = Math.min(name.length + 10, 25); // more animations for fuller look
+  const selectedAnimations = [];
+  for (let i = 0; i < animationCount; i++) {
+    const randomIndex = (name.charCodeAt(i % name.length) + i) % allAnimations.length;
+    selectedAnimations.push(allAnimations[randomIndex]);
+  }
+  setInterval(() => {
+    // Show multiple animations per interval
+    for (let i = 0; i < (window.innerWidth < 500 ? 2 : 4); i++) {
+      const randomAnimation = selectedAnimations[Math.floor(Math.random() * selectedAnimations.length)];
+      createRandomAnimation(randomAnimation);
     }
-    setInterval(function() {
-      var heartArr = document.querySelectorAll(".heart-icon");
-      if (heartArr.length > 100) {
-        heartArr[0].remove();
-      }
-    }, 100);
+  }, 700);
+}
 
+// Allow Enter key to submit
+document.getElementById('userName').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    showSurprise();
+  }
+});
 
-    var clickCount = 0;
-    var already = false;
-
-    function moveButton(btn) {
-      var buttonEl = document.getElementById("" + btn);
-      var buttonParent = buttonEl.parentNode;
-
-      var buttonPosX = Math.floor(Math.random() * 50) + 1;
-      var buttonPosY = Math.floor(Math.random() * 75) + 1;
-      var randomRotation = Math.floor(Math.random() * 360);
-
-      buttonEl.style.position = "relative";
-      buttonEl.style.left = buttonPosX + "px";
-      buttonEl.style.top = buttonPosY + "px";
-      buttonEl.style.transform = "rotate(" + randomRotation + "deg)";
-      buttonParent.appendChild(buttonEl);
-
-      clickCount++;
-
-      if (clickCount == 3) {
-        clickCount = 0;
-      }
-    }
-
-    /////
-
-    function doNotWant() {
-      Swal.fire({
-        title: '' + textNo.innerHTML,
-        imageUrl: '' + stickerNo.src,
-        imageWidth: 90,
-        imageHeight: 90,
-        imageAlt: 'by aoudumber.dev',
-        confirmButtonText: 'OK',
-        allowOutsideClick: false,
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        willClose: () => {
-          // No action needed on close
-        }
-      });
-    }
+    // Start animations from the beginning
+    startRepeatingRockets();
+    startAnimations('Guest'); // Use a default name for randomization
   </script>
 </body>
 </html>
+
