@@ -710,6 +710,59 @@
       transition: left 1s cubic-bezier(.6,1,.6,1);
     }
 
+    /* Upskill surprise button */
+    #upskillBtn {
+      display: none;
+      position: fixed; /* so it appears across overlays/pages */
+      right: -220px;
+      bottom: 4vh;
+      padding: 14px 30px;
+      font-size: 1.05em;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, #ff9f40, #ff6b35);
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(255, 159, 64, 0.28);
+      transition: right 900ms cubic-bezier(.6,1,.6,1), transform 600ms ease, opacity 300ms ease;
+      z-index: 9999;
+      pointer-events: auto;
+    }
+    #upskillBtn.show {
+      display: inline-block;
+      right: calc(50vw - 140px);
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      animation: popIn 700ms cubic-bezier(.2,.9,.2,1);
+    }
+    /* Floating/bobbing effect like hanging button */
+    @keyframes upskillFloat {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+    /* subtle pulse glow */
+    @keyframes upskillPulse {
+      0% { box-shadow: 0 8px 22px rgba(255,159,64,0.28); }
+      50% { box-shadow: 0 18px 36px rgba(255,159,64,0.45); }
+      100% { box-shadow: 0 8px 22px rgba(255,159,64,0.28); }
+    }
+    #upskillBtn.show {
+      animation: popIn 700ms cubic-bezier(.2,.9,.2,1), upskillFloat 2.4s ease-in-out infinite;
+    }
+    #upskillBtn:hover {
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 22px 48px rgba(255,159,64,0.55);
+    }
+    /* small icon/emoji spacing */
+    #upskillBtn .emoji { margin-right: 8px; font-size:1.1em; }
+    @keyframes popIn {
+      0% { transform: translateY(12px) scale(0.85); opacity: 0; }
+      60% { transform: translateY(-6px) scale(1.06); opacity: 1; }
+      100% { transform: translateY(0) scale(1); }
+    }
+
     /* Chhath Puja Wish Page */
     .chhath-wish-page {
       display: none;
@@ -777,6 +830,8 @@
 
   <!-- Fireworks background canvas (behind animations) -->
   <canvas id="fireworksCanvas"></canvas>
+  <!-- Upskill surprise button (global so it can appear across overlays) -->
+  <button id="upskillBtn" class="hanging-btn" aria-label="Upskill Gift"><span class="emoji">🎁</span>Surprise: Upskill Gift</button>
 
 
   <!-- Landing Page -->
@@ -838,7 +893,7 @@
       <img src="https://www.ucf.edu/wp-content/blogs.dir/20/files/2022/10/Diwali.jpg?w=400&h=400&fit=crop" alt="Diwali" style="width:260px; height:260px; border-radius:20px; box-shadow:0 0 40px #ffb347;">
       <p style="font-size:1.3em; color:#333; font-weight:600;">May your life be filled with light, joy, and prosperity!</p>
     </div>
-    <button id="nextSurpriseBtn" class="hanging-btn" style="display:none; position:absolute; left:-220px; bottom:4vh; padding:18px 38px; font-size:1.3em; font-weight:700; color:white; background:linear-gradient(135deg,#ff6b35,#f7931e); border:none; border-radius:50px; cursor:pointer; box-shadow:0 10px 25px rgba(255,107,53,0.3); transition:left 1s cubic-bezier(.6,1,.6,1);">Next Surprise →</button>
+  <button id="nextSurpriseBtn" class="hanging-btn" style="display:none; position:absolute; left:-220px; bottom:4vh; padding:18px 38px; font-size:1.3em; font-weight:700; color:white; background:linear-gradient(135deg,#ff6b35,#f7931e); border:none; border-radius:50px; cursor:pointer; box-shadow:0 10px 25px rgba(255,107,53,0.3); transition:left 1s cubic-bezier(.6,1,.6,1);">Next Surprise →</button>
   </div>
 
   <!-- Chhath Puja Wish Page -->
@@ -895,6 +950,12 @@
         btn.style.display = 'block';
         setTimeout(() => { btn.style.left = 'calc(50vw - 110px)'; }, 100); // slide in
       }, 15000);
+      // Show Upskill gift button after 30 seconds
+      if (window._upskillTimer) clearTimeout(window._upskillTimer);
+      window._upskillTimer = setTimeout(() => {
+        const upBtn = document.getElementById('upskillBtn');
+        if (upBtn) upBtn.classList.add('show');
+      }, 30000);
     }
 
     // Next Surprise button click handler
@@ -910,13 +971,37 @@
       document.getElementById('chhathWishPage').style.display = 'flex';
       // Hide rocket animations during chhath wish page
       hideRocketAnimations();
-      // After 3.5s, show main celebration page
+      // After 9 seconds, show main celebration page
       setTimeout(() => {
         document.getElementById('chhathWishPage').style.display = 'none';
         document.getElementById('celebrationPage').classList.add('active');
         // Restore rocket animations
         showRocketAnimations();
-      }, 3500);
+      }, 9000);
+      // Also schedule the upskill button to appear 25s after the Next Surprise is clicked
+      if (window._upskillTimer) clearTimeout(window._upskillTimer);
+      window._upskillTimer = setTimeout(() => {
+        const upBtn = document.getElementById('upskillBtn');
+        if (upBtn) upBtn.classList.add('show');
+      }, 25000);
+    }
+
+    // Upskill button click handler: stop music and redirect to YouTube
+    const upskillBtn = document.getElementById('upskillBtn');
+    if (upskillBtn) {
+      upskillBtn.addEventListener('click', function() {
+        // Clear timer to avoid double actions
+        if (window._upskillTimer) { clearTimeout(window._upskillTimer); window._upskillTimer = null; }
+        // Stop any playing audio
+        try {
+          if (diwaliAudio && !diwaliAudio.paused) { diwaliAudio.pause(); diwaliAudio.currentTime = 0; }
+        } catch(e) {}
+        try {
+          if (surpriseAudio && !surpriseAudio.paused) { surpriseAudio.pause(); surpriseAudio.currentTime = 0; }
+        } catch(e) {}
+        // Open the YouTube link in a new tab
+        window.open('https://youtu.be/fBVWDU542ug', '_blank');
+      });
     }
 
     function hideRocketAnimations() {
