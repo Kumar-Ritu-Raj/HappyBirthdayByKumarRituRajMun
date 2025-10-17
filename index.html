@@ -259,6 +259,36 @@
       overflow: visible;
     }
 
+    /* Full-screen fireworks canvas behind the animations container */
+    #fireworksCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none; /* allow clicks to pass through */
+      z-index: 1; /* behind #animations (z-index:2) and content (z-index:5) */
+      mix-blend-mode: screen; /* nice additive glow blending */
+    }
+
+    /* Wish-page-specific canvas (placed inside each fixed wish overlay)
+       These will render fireworks that are visible while the wish overlay is shown. */
+    .wish-page-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1; /* behind the page content (which will be z-index:2) */
+      mix-blend-mode: screen;
+    }
+
+    .wish-page-content {
+      position: relative;
+      z-index: 2; /* above the wish-page-canvas */
+    }
+
     /* Rocket Animation */
     .rocket {
       position: absolute;
@@ -742,6 +772,10 @@
 </head>
 <body>
 
+  <!-- Fireworks background canvas (behind animations) -->
+  <canvas id="fireworksCanvas"></canvas>
+
+
   <!-- Landing Page -->
   <div class="landing-page" id="landingPage">
     <div class="input-container">
@@ -794,7 +828,8 @@
 
   <!-- Diwali Wish Page -->
   <div class="diwali-wish-page" id="diwaliWishPage" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:radial-gradient(circle at bottom, #fffbe6, #ffb347 80%); z-index:20; justify-content:center; align-items:center; flex-direction:column;">
-    <div style="text-align:center; margin-top:2vh;">
+    <canvas class="wish-page-canvas" id="diwaliCanvas"></canvas>
+    <div class="wish-page-content" style="text-align:center; margin-top:2vh;">
             <h2 style="font-family:'Great Vibes',cursive; font-size:2.5em; color:#ff6b35; margin:30px 0 10px; text-shadow:0 0 20px #ffde59;">Happy Diwali🪔</h2>
       <img src="https://www.ucf.edu/wp-content/blogs.dir/20/files/2022/10/Diwali.jpg?w=400&h=400&fit=crop" alt="Diwali" style="width:260px; height:260px; border-radius:20px; box-shadow:0 0 40px #ffb347;">
       <p style="font-size:1.3em; color:#333; font-weight:600;">May your life be filled with light, joy, and prosperity!</p>
@@ -804,8 +839,9 @@
 
   <!-- Chhath Puja Wish Page -->
   <div class="chhath-wish-page" id="chhathWishPage" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:radial-gradient(circle at bottom, #e0f7fa, #f9d423 80%); z-index:20; justify-content:center; align-items:center; flex-direction:column;">
-    <div style="text-align:center; margin-top:2vh;">
-            <h2 style="font-family:'Great Vibes',cursive; font-size:2.5em; color:#f9d423; margin:30px 0 10px; text-shadow:0 0 20px #ffde59;">Happy Chhath Puja!</h2>
+    <canvas class="wish-page-canvas" id="chhathCanvas"></canvas>
+    <div class="wish-page-content" style="text-align:center; margin-top:2vh;">
+            <h2 style="font-family:'Great Vibes',cursive; font-size:2.5em; color:#9e622b; margin:30px 0 10px; text-shadow:0 0 20px #ffde59;">Happy Chhath Puja!</h2>
       <img src="https://tse4.mm.bing.net/th/id/OIP.RtZvu84SZV--TR5Vn0RcZgHaGJ?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3?w=400&h=400&fit=crop" alt="Chhath Puja" style="width:260px; height:260px; border-radius:20px; box-shadow:0 0 40px #f9d423;">
       <p style="font-size:1.3em; color:#333; font-weight:600;">Wishing you blessings of the Sun God and purity in life!</p>
     </div>
@@ -1237,6 +1273,177 @@ document.getElementById('userName').addEventListener('keypress', function(e) {
     // Start animations from the beginning
     startRepeatingRockets();
     startAnimations('Guest'); // Use a default name for randomization
+  </script>
+
+  <script>
+    // Fireworks instance factory: create a fireworks animation tied to a canvas element
+    function createFireworksInstance(canvas, opts = {}) {
+      if (!canvas) return null;
+      const ctx = canvas.getContext('2d');
+      let width = 0, height = 0, DPR = window.devicePixelRatio || 1;
+      let particles = [];
+      let rockets = [];
+      const maxRockets = opts.maxRockets || 6;
+      const maxParticles = opts.maxParticles || 300;
+      let running = true;
+
+      function resize() {
+        DPR = window.devicePixelRatio || 1;
+        width = canvas.clientWidth || window.innerWidth;
+        height = canvas.clientHeight || window.innerHeight;
+        canvas.width = Math.floor(width * DPR);
+        canvas.height = Math.floor(height * DPR);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      }
+
+      function Rocket(x, y) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * 2;
+        this.vy = - (4 + Math.random() * 5);
+        this.life = 0;
+        this.color = `hsl(${Math.floor(Math.random()*360)}, 100%, 60%)`;
+      }
+      Rocket.prototype.step = function(dt) {
+        this.vy += 0.06;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.life += dt;
+        if (this.vy > -1 || this.life > 2.2) {
+          explode(this.x, this.y, this.color);
+          return false;
+        }
+        return true;
+      }
+
+      function Particle(x, y, color) {
+        this.x = x; this.y = y;
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 1 + Math.random() * 4;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed;
+        this.alpha = 1;
+        this.decay = 0.01 + Math.random() * 0.03;
+        this.color = color;
+      }
+      Particle.prototype.step = function(dt) {
+        this.vy += 0.02;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.alpha -= this.decay * dt * 12;
+        return this.alpha > 0;
+      }
+
+      function explode(x, y, color) {
+        const count = 14 + Math.floor(Math.random() * 36);
+        for (let i = 0; i < count && particles.length < maxParticles; i++) {
+          particles.push(new Particle(x, y, color));
+        }
+      }
+
+      function step(ts) {
+        if (!running) return;
+        if (!step.last) step.last = ts;
+        const dt = Math.min(0.05, (ts - step.last) / 1000);
+        step.last = ts;
+
+        // automatic rockets
+        if (rockets.length < maxRockets && Math.random() < 0.06) {
+          rockets.push(new Rocket(Math.random() * width, height + 20));
+        }
+
+        for (let i = rockets.length - 1; i >= 0; i--) {
+          if (!rockets[i].step(dt)) rockets.splice(i, 1);
+        }
+        for (let i = particles.length - 1; i >= 0; i--) {
+          if (!particles[i].step(dt)) particles.splice(i, 1);
+        }
+
+        ctx.clearRect(0, 0, width, height);
+        ctx.globalCompositeOperation = 'lighter';
+        for (let p of particles) {
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(${hexToRgb(p.color)}, ${Math.max(0, p.alpha)})`;
+          ctx.arc(p.x, p.y, 2.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        for (let r of rockets) {
+          ctx.beginPath();
+          ctx.fillStyle = r.color;
+          ctx.arc(r.x, r.y, 2.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalCompositeOperation = 'source-over';
+        requestAnimationFrame(step);
+      }
+
+      function hexToRgb(hsl) {
+        const m = hsl.match(/hsl\((\d+),\s*(\d+)%?,\s*(\d+)%?\)/);
+        if (!m) return '255,255,255';
+        const h = Number(m[1]) / 360;
+        const s = Number(m[2]) / 100;
+        const l = Number(m[3]) / 100;
+        function hue2rgb(p, q, t) {
+          if (t < 0) t += 1;
+          if (t > 1) t -= 1;
+          if (t < 1/6) return p + (q - p) * 6 * t;
+          if (t < 1/2) return q;
+          if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+          return p;
+        }
+        let r, g, b;
+        if (s === 0) { r = g = b = l; }
+        else {
+          const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+          const p = 2 * l - q;
+          r = hue2rgb(p, q, h + 1/3);
+          g = hue2rgb(p, q, h);
+          b = hue2rgb(p, q, h - 1/3);
+        }
+        return `${Math.round(r*255)},${Math.round(g*255)},${Math.round(b*255)}`;
+      }
+
+      // Public API
+      function launchRocketAt(x) {
+        rockets.push(new Rocket(x, height + 20));
+      }
+      function start() { running = true; step.last = null; requestAnimationFrame(step); }
+      function stop() { running = false; }
+
+      // initialize
+      resize();
+      window.addEventListener('resize', resize);
+      start();
+
+      return { launchRocketAt, start, stop, canvas };
+    }
+
+    // Create instances for global background and both wish overlays
+    const instances = [];
+    const globalCanvas = document.getElementById('fireworksCanvas');
+    const diwaliCanvas = document.getElementById('diwaliCanvas');
+    const chhathCanvas = document.getElementById('chhathCanvas');
+    if (globalCanvas) instances.push(createFireworksInstance(globalCanvas, { maxRockets: 5, maxParticles: 300 }));
+    if (diwaliCanvas) instances.push(createFireworksInstance(diwaliCanvas, { maxRockets: 4, maxParticles: 240 }));
+    if (chhathCanvas) instances.push(createFireworksInstance(chhathCanvas, { maxRockets: 4, maxParticles: 240 }));
+
+    // On click/tap: trigger fireworks on visible canvases only
+    window.addEventListener('pointerdown', function(e) {
+      instances.forEach(inst => {
+        try {
+          const c = inst.canvas;
+          // only trigger if canvas has size and is attached/visible
+          if (!c || c.clientWidth === 0 || !c.offsetParent) return;
+          const rect = c.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          inst.launchRocketAt(x);
+        } catch (err) {
+          // ignore
+        }
+      });
+    });
   </script>
 </body>
 </html>
