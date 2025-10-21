@@ -927,15 +927,15 @@
       hideRocketAnimations();
       // Show Diwali Wish Page
       document.getElementById('diwaliWishPage').style.display = 'flex';
-      // Play diwali audio in loop
-      diwaliAudio.currentTime = 0;
+      // Play diwali audio in loop starting from 3 seconds
+      diwaliAudio.currentTime = 4;
       diwaliAudio.play();
-      // Show Next Surprise button after 15 seconds
+      // Show Next Surprise button after 11 seconds
       setTimeout(function() {
         const btn = document.getElementById('nextSurpriseBtn');
         btn.style.display = 'block';
         setTimeout(() => { btn.style.left = 'calc(50vw - 110px)'; }, 100); // slide in
-      }, 15000);
+      }, 11000);
       // Show Upskill gift button after 30 seconds
       if (window._upskillTimer) clearTimeout(window._upskillTimer);
       window._upskillTimer = setTimeout(() => {
@@ -950,7 +950,7 @@
       diwaliAudio.pause();
       diwaliAudio.currentTime = 0;
       diwaliAudio.loop = false;
-      // Play next song
+      // Play next song starting from 3 seconds
       surpriseAudio.currentTime = 0;
       surpriseAudio.play();
       document.getElementById('diwaliWishPage').style.display = 'none';
@@ -963,8 +963,8 @@
         document.getElementById('celebrationPage').classList.add('active');
         // Restore rocket animations
         showRocketAnimations();
-      }, 9000);
-      // Also schedule the upskill button to appear 25s after the Next Surprise is clicked
+      }, 4000);
+      // Also schedule the upskill button to appear 30s after the Next Surprise is clicked
       if (window._upskillTimer) clearTimeout(window._upskillTimer);
       window._upskillTimer = setTimeout(() => {
         const upBtn = document.getElementById('upskillBtn');
@@ -986,7 +986,7 @@
           if (surpriseAudio && !surpriseAudio.paused) { surpriseAudio.pause(); surpriseAudio.currentTime = 0; }
         } catch(e) {}
         // Open the YouTube link in a new tab
-        window.open('https://youtu.be/fBVWDU542ug', '_blank');
+        window.open('https://www.youtube.com/shorts/1Of7DPFEnhI', '_blank');
       });
     }
 
